@@ -75,6 +75,14 @@ func (p *Parser) parseLetStatement() *ast.LetStatement {
 	return stmt
 }
 
+func (p *Parser) registerPrefix(tkn token.TokenType, fn prefixParseFn) {
+	p.prefixParseFns[tkn] = fn
+}
+
+func (p *Parser) infixPrefix(tkn token.TokenType, fn infixParseFn) {
+	p.infixParseFns[tkn] = fn
+}
+
 func (p *Parser) parseReturnStatement() *ast.ReturnStatement {
 	stmt := &ast.ReturnStatement{Token: p.curToken}
 
